@@ -1,0 +1,21 @@
+{
+  "required": true,
+  "package": "com.dolthhaven.doltcompat.core.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "refmap": "dolt_compat.refmap.json",
+  "mixins": [
+    "CattailBlockMixin",
+    "CuttingBoardMixin",
+    "DolphinMixin",
+    "DoubleCattailBlockMixin",
+    "HalfWaterloggedDecorationFeatureMixin",
+    "MuddyOakFeatureMixin",
+    "PowderSnowBlockMixin",
+    "RichSoilMixin",
+    "ShallowWaterFeatureMixin",
+    "SlimeMixin"
+  ],
+  "client": [
+  ],
+  "minVersion": "0.8"
+}

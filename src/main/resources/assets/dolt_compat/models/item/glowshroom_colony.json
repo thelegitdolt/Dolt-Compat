@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "dolt_compat:glowshroom_colony_stage3"
+  }
+}
