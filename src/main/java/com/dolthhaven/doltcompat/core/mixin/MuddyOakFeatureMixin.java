@@ -1,5 +1,6 @@
 package com.dolthhaven.doltcompat.core.mixin;
 
+import com.dolthhaven.doltcompat.core.DoltCompatConfig;
 import com.teamabnormals.environmental.core.registry.EnvironmentalBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -18,12 +19,13 @@ public class MuddyOakFeatureMixin {
     at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/WorldGenLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"),
     index = 1)
     private BlockState DoltCompat$OakToWillow(BlockState state) {
-        if (state.is(GoodEndingBlocks.MUDDY_OAK_LOG.get())) {
-            return EnvironmentalBlocks.WILLOW_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
-        }
-        else if (state.is(Blocks.OAK_LEAVES)) {
-            return EnvironmentalBlocks.WILLOW_LEAVES.get().defaultBlockState()
-                    .setValue(BlockStateProperties.DISTANCE, state.getValue(BlockStateProperties.DISTANCE));
+        if (DoltCompatConfig.Common.COMMON.WillowReplacement.get()) {
+            if (state.is(GoodEndingBlocks.MUDDY_OAK_LOG.get())) {
+                return EnvironmentalBlocks.WILLOW_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
+            } else if (state.is(Blocks.OAK_LEAVES)) {
+                return EnvironmentalBlocks.WILLOW_LEAVES.get().defaultBlockState()
+                        .setValue(BlockStateProperties.DISTANCE, state.getValue(BlockStateProperties.DISTANCE));
+            }
         }
         return state;
     }
@@ -31,6 +33,6 @@ public class MuddyOakFeatureMixin {
     @ModifyArg(method = "lambda$generateHangingVines$3(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/core/BlockPos;)Z",
     at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static Block DoltCompat$WillowCanFall(Block block) {
-        return block.equals(Blocks.OAK_LEAVES) ? EnvironmentalBlocks.WILLOW_LEAVES.get() : block;
+        return block.equals(Blocks.OAK_LEAVES) && DoltCompatConfig.Common.COMMON.WillowReplacement.get() ? EnvironmentalBlocks.WILLOW_LEAVES.get() : block;
     }
 }
