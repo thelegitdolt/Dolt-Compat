@@ -30,16 +30,18 @@ public class DoltCompatDispensers {
         registerCauldronDispenseBehavior();
     }
 
+    private static final DispenseItemBehavior BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
+    private static final DispenseItemBehavior WATER_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
+    private static final DispenseItemBehavior MILK_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.MILK_BUCKET);
+    private static final DispenseItemBehavior LAVA_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.LAVA_BUCKET);
+    private static final DispenseItemBehavior POWDER_SNOW_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.POWDER_SNOW_BUCKET);
+    private static final DispenseItemBehavior GLASS_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.GLASS_BOTTLE);
+    private static final DispenseItemBehavior MILK_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(NeapolitanItems.MILK_BOTTLE.get());
+    private static final DispenseItemBehavior WATER_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.POTION);
+
     public static void registerCauldronDispenseBehavior() {
 
-        final DispenseItemBehavior BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
-        final DispenseItemBehavior WATER_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
-        final DispenseItemBehavior MILK_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.MILK_BUCKET);
-        final DispenseItemBehavior LAVA_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.LAVA_BUCKET);
-        final DispenseItemBehavior POWDER_SNOW_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.POWDER_SNOW_BUCKET);
-        final DispenseItemBehavior GLASS_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.GLASS_BOTTLE);
-        final DispenseItemBehavior MILK_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(NeapolitanItems.MILK_BOTTLE.get());
-        final DispenseItemBehavior WATER_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.POTION);
+
 
         DispenserBlock.registerBehavior(Items.BUCKET, new OptionalDispenseItemBehavior() {
                     @Override
@@ -85,7 +87,7 @@ public class DoltCompatDispensers {
         DispenserBlock.registerBehavior(Items.MILK_BUCKET, getEmptyCauldronBucketBehavior(NeapolitanBlocks.MILK_CAULDRON.get(), SoundEvents.BUCKET_EMPTY, MILK_BUCKET));
 
         DispenserBlock.registerBehavior(NeapolitanItems.MILK_BOTTLE.get(), getEmptyCauldronBottleBehavior((LayeredCauldronBlock) NeapolitanBlocks.MILK_CAULDRON.get(), MILK_BOTTLE));
-        DispenserBlock.registerBehavior(Items.POTION, DispenseWaterPotion(WATER_BOTTLE));
+        DispenserBlock.registerBehavior(Items.POTION, DispenseWaterPotion());
         DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -175,19 +177,18 @@ public class DoltCompatDispensers {
         };
     }
 
-    private static void addTo(BlockSource source, Item item) {
-        if (source.<DispenserBlockEntity>getEntity().addItem(new ItemStack(item)) < 0) {
-            new DefaultDispenseItemBehavior().dispense(source, new ItemStack(item));
-        }
-    }
-
     private static void addTo(BlockSource source, ItemStack stack) {
         if (source.<DispenserBlockEntity>getEntity().addItem(stack) < 0) {
             new DefaultDispenseItemBehavior().dispense(source, stack);
         }
     }
 
-    public static OptionalDispenseItemBehavior DispenseWaterPotion(DispenseItemBehavior behaveior) {
+
+    private static void addTo(BlockSource source, Item item) {
+        addTo(source, new ItemStack(item));
+    }
+
+    public static OptionalDispenseItemBehavior DispenseWaterPotion() {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -213,7 +214,7 @@ public class DoltCompatDispensers {
                         return stack;
                     }
                 }
-                return behaveior.dispense(source, stack);
+                return WATER_BOTTLE.dispense(source, stack);
             }
         };
     }
