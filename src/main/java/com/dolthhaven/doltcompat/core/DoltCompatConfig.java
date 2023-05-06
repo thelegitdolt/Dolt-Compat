@@ -20,11 +20,10 @@ public class DoltCompatConfig {
             LeatherHorseThing = builder.comment("If horses wearing leather horse armor can walk on top of powdered snow.").define("Warm Horse Armor", true);
 
             builder.pop();
-            builder.pop();
 
             builder.push("Environmental changes");
             WillowReplacement = builder.comment("If Good Ending's Muddy Oak should instead use Environmental's Willow blocks.").define("Based Trees", true);
-//            BasedCattail = builder.comment("If Enviromental's cattails should be changed to not fill the entire swamp with seeding cattails.").define("Based Cattails", true);
+//           BasedCattail = builder.comment("If Enviromental's cattails should be changed to not fill the entire swamp with seeding cattails.").define("Based Cattails", true);
 
             builder.pop();
 

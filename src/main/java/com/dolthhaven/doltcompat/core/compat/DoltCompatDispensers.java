@@ -87,7 +87,7 @@ public class DoltCompatDispensers {
         DispenserBlock.registerBehavior(Items.MILK_BUCKET, getEmptyCauldronBucketBehavior(NeapolitanBlocks.MILK_CAULDRON.get(), SoundEvents.BUCKET_EMPTY, MILK_BUCKET));
 
         DispenserBlock.registerBehavior(NeapolitanItems.MILK_BOTTLE.get(), getEmptyCauldronBottleBehavior((LayeredCauldronBlock) NeapolitanBlocks.MILK_CAULDRON.get(), MILK_BOTTLE));
-        DispenserBlock.registerBehavior(Items.POTION, DispenseWaterPotion());
+        DispenserBlock.registerBehavior(Items.POTION, dispenseWaterPotion());
         DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -183,12 +183,11 @@ public class DoltCompatDispensers {
         }
     }
 
-
     private static void addTo(BlockSource source, Item item) {
         addTo(source, new ItemStack(item));
     }
 
-    public static OptionalDispenseItemBehavior DispenseWaterPotion() {
+    public static OptionalDispenseItemBehavior dispenseWaterPotion() {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
