@@ -9,11 +9,11 @@
     "DolphinMixin",
     "DoubleCattailBlockMixin",
     "HalfWaterloggedDecorationFeatureMixin",
-    "MuddyOakFeatureMixin",
     "PowderSnowBlockMixin",
     "RichSoilMixin",
     "ShallowWaterFeatureMixin",
-    "SlimeMixin"
+    "SlimeMixin",
+    "TestMixin"
   ],
   "client": [
   ],
