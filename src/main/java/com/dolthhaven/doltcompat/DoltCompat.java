@@ -3,6 +3,7 @@ package com.dolthhaven.doltcompat;
 import com.dolthhaven.doltcompat.core.DoltCompatConfig;
 import com.dolthhaven.doltcompat.core.compat.DoltCompatCompat;
 import com.dolthhaven.doltcompat.core.compat.DoltCompatVillaging;
+import com.dolthhaven.doltcompat.core.data.tags.DoltCompatAdvancementMods;
 import com.dolthhaven.doltcompat.core.data.tags.DoltSecretBlockTags;
 import com.mojang.logging.LogUtils;
 import com.teamabnormals.blueprint.core.util.registry.RegistryHelper;
@@ -59,9 +60,10 @@ public class DoltCompat {
         ExistingFileHelper EFH = event.getExistingFileHelper();
         boolean includeServer = event.includeServer();
 
-
         DoltSecretBlockTags taggies = new DoltSecretBlockTags(generator, EFH);
+
         generator.addProvider(includeServer, taggies);
+        generator.addProvider(includeServer, new DoltCompatAdvancementMods(generator));
     }
 
     @SubscribeEvent
