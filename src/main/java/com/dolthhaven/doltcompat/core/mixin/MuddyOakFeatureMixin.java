@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.ModifyArg;
 public class MuddyOakFeatureMixin {
     @ModifyArg(method = "Lnet/orcinus/goodending/world/gen/features/MuddyOakTreeFeature;place(Lnet/minecraft/world/level/levelgen/feature/FeaturePlaceContext;)Z",
     at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/WorldGenLevel;setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;I)Z"),
-    remap = false, index = 1)
+    index = 1)
     private BlockState DoltCompat$OakToWillow(BlockState state) {
         if (state.is(GoodEndingBlocks.MUDDY_OAK_LOG.get())) {
             return EnvironmentalBlocks.WILLOW_LOG.get().defaultBlockState().setValue(RotatedPillarBlock.AXIS, state.getValue(RotatedPillarBlock.AXIS));
@@ -29,7 +29,7 @@ public class MuddyOakFeatureMixin {
     }
 
     @ModifyArg(method = "lambda$generateHangingVines$3(Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/core/BlockPos;)Z",
-    at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"), remap = false)
+    at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/state/BlockState;is(Lnet/minecraft/world/level/block/Block;)Z"))
     private static Block DoltCompat$WillowCanFall(Block block) {
         return block.equals(Blocks.OAK_LEAVES) ? EnvironmentalBlocks.WILLOW_LEAVES.get() : block;
     }
