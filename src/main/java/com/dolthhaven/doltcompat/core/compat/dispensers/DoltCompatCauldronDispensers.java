@@ -1,5 +1,6 @@
-package com.dolthhaven.doltcompat.core.compat;
+package com.dolthhaven.doltcompat.core.compat.dispensers;
 
+import com.dolthhaven.doltcompat.core.DoltCompatConfig;
 import com.teamabnormals.neapolitan.core.registry.NeapolitanBlocks;
 import com.teamabnormals.neapolitan.core.registry.NeapolitanItems;
 import net.minecraft.core.BlockPos;
@@ -25,11 +26,13 @@ import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 
-public class DoltCompatDispensers {
-    public static void registerDispenserBehavior() {
-        registerCauldronDispenseBehavior();
-    }
+public class DoltCompatCauldronDispensers {
+    public static void registerCauldrons() {
+        if (DoltCompatConfig.Common.COMMON.DoDispenseCauldron.get()) {
+            registerCauldronDispenseBehavior();
+        }
 
+    }
     private static final DispenseItemBehavior BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
     private static final DispenseItemBehavior WATER_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
     private static final DispenseItemBehavior MILK_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.MILK_BUCKET);
@@ -39,10 +42,7 @@ public class DoltCompatDispensers {
     private static final DispenseItemBehavior MILK_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(NeapolitanItems.MILK_BOTTLE.get());
     private static final DispenseItemBehavior WATER_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.POTION);
 
-    public static void registerCauldronDispenseBehavior() {
-
-
-
+    private static void registerCauldronDispenseBehavior() {
         DispenserBlock.registerBehavior(Items.BUCKET, new OptionalDispenseItemBehavior() {
                     @Override
                     protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -119,7 +119,7 @@ public class DoltCompatDispensers {
         });
     }
 
-    public static OptionalDispenseItemBehavior getEmptyCauldronBucketBehavior(Block cauldron, SoundEvent sound, DispenseItemBehavior behave) {
+    private static OptionalDispenseItemBehavior getEmptyCauldronBucketBehavior(Block cauldron, SoundEvent sound, DispenseItemBehavior behave) {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -146,7 +146,7 @@ public class DoltCompatDispensers {
         };
     }
 
-    public static OptionalDispenseItemBehavior getEmptyCauldronBottleBehavior(LayeredCauldronBlock cauldron, DispenseItemBehavior behavior) {
+    private static OptionalDispenseItemBehavior getEmptyCauldronBottleBehavior(LayeredCauldronBlock cauldron, DispenseItemBehavior behavior) {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -187,7 +187,7 @@ public class DoltCompatDispensers {
         addTo(source, new ItemStack(item));
     }
 
-    public static OptionalDispenseItemBehavior dispenseWaterPotion() {
+    private static OptionalDispenseItemBehavior dispenseWaterPotion() {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {

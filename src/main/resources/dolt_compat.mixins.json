@@ -8,6 +8,8 @@
     "CuttingBoardMixin",
     "DolphinMixin",
     "DoubleCattailBlockMixin",
+    "DuckweedFeatureMixin",
+    "FallenLogFeatureMixin",
     "HalfWaterloggedDecorationFeatureMixin",
     "MuddyOakFeatureMixin",
     "PowderSnowBlockMixin",

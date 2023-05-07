@@ -1,6 +1,7 @@
 package com.dolthhaven.doltcompat.core.compat;
 
 import com.dolthhaven.doltcompat.core.DoltCompatConfig;
+import com.dolthhaven.doltcompat.core.compat.dispensers.DoltCompatDispensers;
 import com.teamabnormals.blueprint.core.util.DataUtil;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.RegistryObject;
@@ -11,9 +12,7 @@ import static com.dolthhaven.doltcompat.common.registry.DoltCompatItems.*;
 public class DoltCompatCompat {
     public static void registerCompat() {
         registerCompostable();
-        if (DoltCompatConfig.Common.COMMON.DoDispenseCauldron.get()) {
-            DoltCompatDispensers.registerDispenserBehavior();
-        }
+        DoltCompatDispensers.registerDispenserBehavior();
     }
 
     public static void registerCompostable() {
