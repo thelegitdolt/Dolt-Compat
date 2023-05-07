@@ -52,12 +52,10 @@ public class DoltCompatSheepDyeDispensers {
                     for (Sheep sheep : Sheepies) {
                         stack.shrink(1);
                         sheep.setColor(dye);
+                        return stack;
                     }
-                    return stack;
                 }
-                else {
-                    return DYE_MAP.get(dye).dispense(source, stack);
-                }
+                return DYE_MAP.get(dye).dispense(source, stack);
             }
         };
     }
