@@ -12,7 +12,6 @@
     "EntityMixin",
     "FallenLogFeatureMixin",
     "HalfWaterloggedDecorationFeatureMixin",
-    "MonsterMixin",
     "MuddyOakFeatureMixin",
     "PowderSnowBlockMixin",
     "RichSoilMixin",
