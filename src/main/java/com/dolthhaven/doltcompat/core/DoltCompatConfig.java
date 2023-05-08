@@ -9,6 +9,7 @@ public class DoltCompatConfig {
         public ForgeConfigSpec.ConfigValue<Boolean> DoDispenseSheepDye;
         public ForgeConfigSpec.ConfigValue<Boolean> DisableSlimeChunks;
         public ForgeConfigSpec.ConfigValue<Boolean> UnrealisticDolphins;
+        public ForgeConfigSpec.ConfigValue<Boolean> BOAClearsPoisons;
         public ForgeConfigSpec.ConfigValue<Boolean> LeatherHorseThing;
 //        public ForgeConfigSpec.ConfigValue<Boolean> BasedCattail;
         public ForgeConfigSpec.ConfigValue<Boolean> WillowReplacement;
@@ -21,6 +22,7 @@ public class DoltCompatConfig {
             DisableSlimeChunks = builder.comment("If slime chunks should be smited into ten thousand pieces.").define("Disable slime chunks", false);
             UnrealisticDolphins = builder.comment("If dolphins shouldn't need air to survive.").define("Dolphins don't need air", false);
             LeatherHorseThing = builder.comment("If horses wearing leather horse armor can walk on top of powdered snow.").define("Warm Horse Armor", true);
+            BOAClearsPoisons = builder.comment("If killing an arthropod with a Bane of Arthropod sword will clear any poison effects the player has.").define("BOA cure", true);
 
             builder.pop();
 

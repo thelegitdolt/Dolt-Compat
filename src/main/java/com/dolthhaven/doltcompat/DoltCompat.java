@@ -35,7 +35,6 @@ public class DoltCompat {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
         ModLoadingContext context = ModLoadingContext.get();
 
-
         bus.addListener(this::commonSetup);
         bus.addListener(this::dataSetup);
 

@@ -9,6 +9,7 @@
     "DolphinMixin",
     "DoubleCattailBlockMixin",
     "DuckweedFeatureMixin",
+    "EntityMixin",
     "FallenLogFeatureMixin",
     "HalfWaterloggedDecorationFeatureMixin",
     "MuddyOakFeatureMixin",
