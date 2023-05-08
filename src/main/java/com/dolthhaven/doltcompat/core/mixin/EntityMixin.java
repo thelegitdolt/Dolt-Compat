@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Entity.class)
 public class EntityMixin {
-    @Inject(at = @At("RETURN"), method = "isInWaterOrRain", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "isInWaterOrRain()Z", cancellable = true)
     private void DoltCompat$YouAreNowWetInMilk(CallbackInfoReturnable<Boolean> cir) {
         Entity entity = (Entity) ((Object) this);
         BlockState state = entity.level.getBlockState(entity.blockPosition());
