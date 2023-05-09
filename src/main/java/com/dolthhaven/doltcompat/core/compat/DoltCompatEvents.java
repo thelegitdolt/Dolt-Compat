@@ -2,6 +2,7 @@ package com.dolthhaven.doltcompat.core.compat;
 
 import com.dolthhaven.doltcompat.DoltCompat;
 import com.dolthhaven.doltcompat.common.registry.DoltCompatParticles;
+import com.dolthhaven.doltcompat.core.DoltCompatConfig;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
@@ -16,7 +17,7 @@ public class DoltCompatEvents {
     @SubscribeEvent
     public static void onLivingDeath(LivingDeathEvent event) {
         Entity enty = event.getEntity();
-        if (enty.getLevel() instanceof ServerLevel SL && event.getSource().getEntity() instanceof LivingEntity attacker) {
+        if (DoltCompatConfig.Common.COMMON.BOAClearsPoisons.get() && enty.getLevel() instanceof ServerLevel SL && event.getSource().getEntity() instanceof LivingEntity attacker) {
             if (attacker.hasEffect(MobEffects.POISON) && EnchantmentHelper.getDamageBonus(attacker.getMainHandItem(), event.getEntity().getMobType()) >= 1) {
                 attacker.removeEffect(MobEffects.POISON);
                 for (int i = 0; i < 7; i++) {
