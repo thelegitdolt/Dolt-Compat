@@ -1,5 +1,6 @@
 package com.dolthhaven.doltcompat;
 
+import com.dolthhaven.doltcompat.common.registry.DoltCompatParticles;
 import com.dolthhaven.doltcompat.core.DoltCompatConfig;
 import com.dolthhaven.doltcompat.core.compat.DoltCompatCompat;
 import com.dolthhaven.doltcompat.core.compat.DoltCompatVillaging;
@@ -38,6 +39,7 @@ public class DoltCompat {
         bus.addListener(this::commonSetup);
         bus.addListener(this::dataSetup);
 
+        DoltCompatParticles.PARTICLE_TYPES.register(bus);
         REGISTRY_HELPER.register(bus);
         context.registerConfig(ModConfig.Type.COMMON, DoltCompatConfig.Common.COMMON_SPEC);
 
