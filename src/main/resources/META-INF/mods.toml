@@ -35,12 +35,6 @@ side = "BOTH"
     ordering = "NONE"
     side = "BOTH"
 
-[[dependencies.dolt_compat]]
-    modId = "goodending"
-    mandatory = true
-    versionRange = "[1.0.2,)"
-    ordering = "NONE"
-    side = "BOTH"
 
 [[dependencies.dolt_compat]]
 modId = "quark"
