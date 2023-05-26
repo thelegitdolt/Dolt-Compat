@@ -1,8 +1,6 @@
 package com.dolthhaven.doltcompat.core.compat.dispensers;
 
 import com.dolthhaven.doltcompat.core.DoltCompatConfig;
-import com.teamabnormals.neapolitan.core.registry.NeapolitanBlocks;
-import com.teamabnormals.neapolitan.core.registry.NeapolitanItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DefaultDispenseItemBehavior;
@@ -24,25 +22,29 @@ import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.entity.DispenserBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 
 public class DoltCompatCauldronDispensers {
     public static void registerCauldrons() {
         if (DoltCompatConfig.Common.COMMON.DoDispenseCauldron.get()) {
             registerCauldronDispenseBehavior();
+            if (ModList.get().isLoaded("neapolitan")) {
+                DoltCompatNeapolitanCauldronDispensers.registerNeapolitanDispenseBehavior();
+            }
         }
 
     }
-    private static final DispenseItemBehavior BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
-    private static final DispenseItemBehavior WATER_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
-    private static final DispenseItemBehavior MILK_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.MILK_BUCKET);
-    private static final DispenseItemBehavior LAVA_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.LAVA_BUCKET);
-    private static final DispenseItemBehavior POWDER_SNOW_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.POWDER_SNOW_BUCKET);
-    private static final DispenseItemBehavior GLASS_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.GLASS_BOTTLE);
-    private static final DispenseItemBehavior MILK_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(NeapolitanItems.MILK_BOTTLE.get());
-    private static final DispenseItemBehavior WATER_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.POTION);
+
+
 
     private static void registerCauldronDispenseBehavior() {
+        final DispenseItemBehavior BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
+        final DispenseItemBehavior WATER_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.WATER_BUCKET);
+        final DispenseItemBehavior LAVA_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.LAVA_BUCKET);
+        final DispenseItemBehavior POWDER_SNOW_BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.POWDER_SNOW_BUCKET);
+        final DispenseItemBehavior GLASS_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.GLASS_BOTTLE);
+        final DispenseItemBehavior WATER_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.POTION);
         DispenserBlock.registerBehavior(Items.BUCKET, new OptionalDispenseItemBehavior() {
                     @Override
                     protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -68,12 +70,6 @@ public class DoltCompatCauldronDispensers {
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL_POWDER_SNOW, SoundSource.BLOCKS, 0.5f, 0.5f);
                             addTo(source, Items.POWDER_SNOW_BUCKET);
                         }
-                        else if (level.getBlockState(affectPos).is(NeapolitanBlocks.MILK_CAULDRON.get())) {
-                            stack.shrink(1);
-                            level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
-                            level.playSound(null, affectPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
-                            addTo(source, Items.MILK_BUCKET);
-                        }
                         else {
                             return BUCKET.dispense(source, stack);
                         }
@@ -84,10 +80,8 @@ public class DoltCompatCauldronDispensers {
         DispenserBlock.registerBehavior(Items.WATER_BUCKET, getEmptyCauldronBucketBehavior(Blocks.WATER_CAULDRON, SoundEvents.BUCKET_EMPTY, WATER_BUCKET));
         DispenserBlock.registerBehavior(Items.LAVA_BUCKET, getEmptyCauldronBucketBehavior(Blocks.LAVA_CAULDRON, SoundEvents.BUCKET_EMPTY_LAVA, LAVA_BUCKET));
         DispenserBlock.registerBehavior(Items.POWDER_SNOW_BUCKET, getEmptyCauldronBucketBehavior(Blocks.POWDER_SNOW_CAULDRON, SoundEvents.BUCKET_EMPTY_POWDER_SNOW, POWDER_SNOW_BUCKET));
-        DispenserBlock.registerBehavior(Items.MILK_BUCKET, getEmptyCauldronBucketBehavior(NeapolitanBlocks.MILK_CAULDRON.get(), SoundEvents.BUCKET_EMPTY, MILK_BUCKET));
 
-        DispenserBlock.registerBehavior(NeapolitanItems.MILK_BOTTLE.get(), getEmptyCauldronBottleBehavior((LayeredCauldronBlock) NeapolitanBlocks.MILK_CAULDRON.get(), MILK_BOTTLE));
-        DispenserBlock.registerBehavior(Items.POTION, dispenseWaterPotion());
+        DispenserBlock.registerBehavior(Items.POTION, dispenseWaterPotion(WATER_BOTTLE));
         DispenserBlock.registerBehavior(Items.GLASS_BOTTLE, new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -103,15 +97,6 @@ public class DoltCompatCauldronDispensers {
                     level.playSound(null, affectPos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
                     return stack;
                 }
-                else if (state.is(NeapolitanBlocks.MILK_CAULDRON.get())) {
-                    addTo(source, NeapolitanItems.MILK_BOTTLE.get());
-                    int fill = state.getValue(LayeredCauldronBlock.LEVEL);
-                    stack.shrink(1);
-                    level.setBlockAndUpdate(affectPos, fill == 1 ? Blocks.CAULDRON.defaultBlockState() :
-                            NeapolitanBlocks.MILK_CAULDRON.get().defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, fill - 1));
-                    level.playSound(null, affectPos, SoundEvents.BOTTLE_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
-                    return stack;
-                }
                 else {
                     return GLASS_BOTTLE.dispense(source, stack);
                 }
@@ -119,7 +104,7 @@ public class DoltCompatCauldronDispensers {
         });
     }
 
-    private static OptionalDispenseItemBehavior getEmptyCauldronBucketBehavior(Block cauldron, SoundEvent sound, DispenseItemBehavior behave) {
+    protected static OptionalDispenseItemBehavior getEmptyCauldronBucketBehavior(Block cauldron, SoundEvent sound, DispenseItemBehavior behave) {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -146,7 +131,7 @@ public class DoltCompatCauldronDispensers {
         };
     }
 
-    private static OptionalDispenseItemBehavior getEmptyCauldronBottleBehavior(LayeredCauldronBlock cauldron, DispenseItemBehavior behavior) {
+    protected static OptionalDispenseItemBehavior getEmptyCauldronBottleBehavior(LayeredCauldronBlock cauldron, DispenseItemBehavior behavior) {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -177,7 +162,7 @@ public class DoltCompatCauldronDispensers {
         };
     }
 
-    private static void addTo(BlockSource source, ItemStack stack) {
+    protected static void addTo(BlockSource source, ItemStack stack) {
         if (source.<DispenserBlockEntity>getEntity().addItem(stack) < 0) {
             new DefaultDispenseItemBehavior().dispense(source, stack);
         }
@@ -187,7 +172,7 @@ public class DoltCompatCauldronDispensers {
         addTo(source, new ItemStack(item));
     }
 
-    private static OptionalDispenseItemBehavior dispenseWaterPotion() {
+    private static OptionalDispenseItemBehavior dispenseWaterPotion(DispenseItemBehavior thing) {
         return new OptionalDispenseItemBehavior() {
             @Override
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
@@ -213,7 +198,7 @@ public class DoltCompatCauldronDispensers {
                         return stack;
                     }
                 }
-                return WATER_BOTTLE.dispense(source, stack);
+                return thing.dispense(source, stack);
             }
         };
     }

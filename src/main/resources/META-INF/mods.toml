@@ -3,23 +3,23 @@ loaderVersion = "[32,)"
 license="MIT"
 
 [[mods]]
-modId = "dolt_compat"
-version = "${file.jarVersion}"
-logoFile = "logo.png"
-authors = "DoltHHaven"
-credits = "Dolt"
-license="MIT"
-displayName = "Dolt Compat"
-description = '''
-Adds Doltish Compat to some not-doltish mods.
+    modId = "dolt_compat"
+    version = "${file.jarVersion}"
+    logoFile = "logo.png"
+    authors = "DoltHHaven"
+    credits = "Dolt"
+    license="MIT"
+    displayName = "Dolt Compat"
+    description = '''
+    Adds Doltish Compat to some not-doltish mods.
     '''
 
 [[dependencies.dolt_compat]]
-modId = "minecraft"
-mandatory = true
-versionRange = "[1.19.2,1.19.3)"
-ordering = "NONE"
-side = "BOTH"
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.19.2,1.19.3)"
+    ordering = "NONE"
+    side = "BOTH"
 
 [[dependencies.dolt_compat]]
     modId = "forge"
@@ -51,15 +51,8 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.dolt_compat]]
-modId = "neapolitan"
-mandatory = true
-versionRange = "[4.0.2,)"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.dolt_compat]]
-modId = "blueprint"
-mandatory = true
-versionRange = "[6.1.2,)"
-ordering = "AFTER"
-side = "BOTH"
+    modId = "blueprint"
+    mandatory = true
+    versionRange = "[6.1.2,)"
+    ordering = "AFTER"
+    side = "BOTH"
