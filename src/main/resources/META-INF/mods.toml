@@ -37,18 +37,18 @@ license="MIT"
 
 
 [[dependencies.dolt_compat]]
-modId = "quark"
-mandatory = true
-versionRange = "[3.4,)"
-ordering = "NONE"
-side = "BOTH"
+    modId = "quark"
+    mandatory = true
+    versionRange = "[3.4,)"
+    ordering = "NONE"
+    side = "BOTH"
 
 [[dependencies.dolt_compat]]
-modId = "farmersdelight"
-mandatory = true
-versionRange = "[1.2.0,)"
-ordering = "NONE"
-side = "BOTH"
+    modId = "farmersdelight"
+    mandatory = true
+    versionRange = "[1.2.0,)"
+    ordering = "NONE"
+    side = "BOTH"
 
 [[dependencies.dolt_compat]]
     modId = "blueprint"

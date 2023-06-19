@@ -39,10 +39,10 @@ public class DoltCompatNeapolitanCauldronDispensers {
                 BlockPos affectPos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
                 Level level = source.getLevel();
                 if (level.getBlockState(affectPos).is(NeapolitanBlocks.MILK_CAULDRON.get())) {
+                    addTo(source, Items.MILK_BUCKET);
                     stack.shrink(1);
                     level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                     level.playSound(null, affectPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
-                    addTo(source, Items.MILK_BUCKET);
                 }
                 else {
                     return BUCKET.dispense(source, stack);

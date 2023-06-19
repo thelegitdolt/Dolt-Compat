@@ -25,6 +25,8 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.fml.ModList;
 import org.jetbrains.annotations.NotNull;
 
+
+
 public class DoltCompatCauldronDispensers {
     public static void registerCauldrons() {
         if (DoltCompatConfig.Common.COMMON.DoDispenseCauldron.get()) {
@@ -53,22 +55,22 @@ public class DoltCompatCauldronDispensers {
                         BlockPos affectPos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
                         Level level = source.getLevel();
                         if (level.getBlockState(affectPos).is(Blocks.WATER_CAULDRON)) {
+                            addTo(source, Items.WATER_BUCKET);
                             stack.shrink(1);
                             level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
-                            addTo(source, Items.WATER_BUCKET);
                         }
                         else if (level.getBlockState(affectPos).is(Blocks.LAVA_CAULDRON)) {
+                            addTo(source, Items.LAVA_BUCKET);
                             stack.shrink(1);
                             level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL_LAVA, SoundSource.BLOCKS, 0.5f, 0.5f);
-                            addTo(source, Items.LAVA_BUCKET);
                         }
                         else if (level.getBlockState(affectPos).is(Blocks.POWDER_SNOW_CAULDRON)) {
+                            addTo(source, Items.POWDER_SNOW_BUCKET);
                             stack.shrink(1);
                             level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL_POWDER_SNOW, SoundSource.BLOCKS, 0.5f, 0.5f);
-                            addTo(source, Items.POWDER_SNOW_BUCKET);
                         }
                         else {
                             return BUCKET.dispense(source, stack);
