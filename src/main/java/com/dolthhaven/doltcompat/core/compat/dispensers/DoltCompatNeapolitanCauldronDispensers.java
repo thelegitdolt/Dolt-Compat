@@ -9,6 +9,7 @@ import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -30,6 +31,7 @@ public class DoltCompatNeapolitanCauldronDispensers {
         DispenseItemBehavior GLASS_BOTTLE = DispenserBlock.DISPENSER_REGISTRY.get(Items.MILK_BUCKET);
         DispenseItemBehavior BUCKET = DispenserBlock.DISPENSER_REGISTRY.get(Items.BUCKET);
 
+
         DispenserBlock.registerBehavior(NeapolitanItems.MILK_BOTTLE.get(), getEmptyCauldronBottleBehavior((LayeredCauldronBlock) NeapolitanBlocks.MILK_CAULDRON.get(), MILK_BOTTLE));
 
 
@@ -40,6 +42,7 @@ public class DoltCompatNeapolitanCauldronDispensers {
                 Level level = source.getLevel();
                 if (level.getBlockState(affectPos).is(NeapolitanBlocks.MILK_CAULDRON.get())) {
                     addTo(source, Items.MILK_BUCKET);
+                    this.setSuccess(true);
                     stack.shrink(1);
                     level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                     level.playSound(null, affectPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
@@ -59,6 +62,7 @@ public class DoltCompatNeapolitanCauldronDispensers {
                 BlockState state = level.getBlockState(affectPos);
                 if (state.is(NeapolitanBlocks.MILK_CAULDRON.get())) {
                     addTo(source, NeapolitanItems.MILK_BOTTLE.get());
+                    this.setSuccess(true);
                     int fill = state.getValue(LayeredCauldronBlock.LEVEL);
                     stack.shrink(1);
                     level.setBlockAndUpdate(affectPos, fill == 1 ? Blocks.CAULDRON.defaultBlockState() :

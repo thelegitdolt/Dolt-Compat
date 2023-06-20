@@ -50,6 +50,7 @@ public class DoltCompatSheepDyeDispensers {
                         .filter((sheepie) -> !sheepie.getColor().equals(dye)).toList();
                 if (!Sheepies.isEmpty()) {
                     for (Sheep sheep : Sheepies) {
+                        this.setSuccess(true);
                         stack.shrink(1);
                         sheep.setColor(dye);
                         return stack;

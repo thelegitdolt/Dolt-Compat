@@ -56,18 +56,21 @@ public class DoltCompatCauldronDispensers {
                         Level level = source.getLevel();
                         if (level.getBlockState(affectPos).is(Blocks.WATER_CAULDRON)) {
                             addTo(source, Items.WATER_BUCKET);
+                            this.setSuccess(true);
                             stack.shrink(1);
                             level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL, SoundSource.BLOCKS, 0.5f, 0.5f);
                         }
                         else if (level.getBlockState(affectPos).is(Blocks.LAVA_CAULDRON)) {
                             addTo(source, Items.LAVA_BUCKET);
+                            this.setSuccess(true);
                             stack.shrink(1);
                             level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL_LAVA, SoundSource.BLOCKS, 0.5f, 0.5f);
                         }
                         else if (level.getBlockState(affectPos).is(Blocks.POWDER_SNOW_CAULDRON)) {
                             addTo(source, Items.POWDER_SNOW_BUCKET);
+                            this.setSuccess(true);
                             stack.shrink(1);
                             level.setBlockAndUpdate(affectPos, Blocks.CAULDRON.defaultBlockState());
                             level.playSound(null, affectPos, SoundEvents.BUCKET_FILL_POWDER_SNOW, SoundSource.BLOCKS, 0.5f, 0.5f);
@@ -92,6 +95,7 @@ public class DoltCompatCauldronDispensers {
                 BlockState state = level.getBlockState(affectPos);
                 if (state.is(Blocks.WATER_CAULDRON)) {
                     addTo(source, PotionUtils.setPotion(new ItemStack(Items.POTION), Potions.WATER));
+                    this.setSuccess(true);
                     int fill = state.getValue(LayeredCauldronBlock.LEVEL);
                     stack.shrink(1);
                     level.setBlockAndUpdate(affectPos, fill == 1 ? Blocks.CAULDRON.defaultBlockState() :
@@ -121,6 +125,7 @@ public class DoltCompatCauldronDispensers {
 
                 if (canFill) {
                     addTo(source, Items.BUCKET);
+                    this.setSuccess(true);
                     stack.shrink(1);
                     level.setBlockAndUpdate(affectPos, cauldron instanceof LayeredCauldronBlock ? cauldron.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3) : cauldron.defaultBlockState());
                     level.playSound(null, affectPos, sound, SoundSource.BLOCKS, 0.5f, 0.5f);
