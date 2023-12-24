@@ -9,6 +9,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import org.jetbrains.annotations.NotNull;
 import vazkii.quark.content.world.module.GlimmeringWealdModule;
 import vectorwing.farmersdelight.common.block.MushroomColonyBlock;
 
@@ -21,7 +22,7 @@ public class GlowshroomColonyBlock extends MushroomColonyBlock {
     }
 
     @Override
-    protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
+    protected boolean mayPlaceOn(@NotNull BlockState state, @NotNull BlockGetter level, @NotNull BlockPos pos) {
         return super.mayPlaceOn(state, level, pos) || state.is(Blocks.DEEPSLATE);
     }
 

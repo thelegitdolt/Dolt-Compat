@@ -10,6 +10,6 @@ import net.orcinus.goodending.init.GoodEndingBiomes;
 public class DoltCompatVillaging {
     public static void registerAllVillaging() {
         VillagerType.BY_BIOME.put(GoodEndingBiomes.MARSHY_SWAMP_KEY,
-                VillagerType.byBiome(ForgeRegistries.BIOMES.getHolder(EnvironmentalBiomes.MARSH.get()).get()));
+                VillagerType.byBiome(ForgeRegistries.BIOMES.getHolder(EnvironmentalBiomes.MARSH.get()).orElseThrow()));
     }
 }

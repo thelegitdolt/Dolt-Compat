@@ -14,6 +14,7 @@ public class DoltCompatConfig {
         public ForgeConfigSpec.ConfigValue<Boolean> LeatherHorseThing;
         public ForgeConfigSpec.ConfigValue<Boolean> WillowReplacement;
         public ForgeConfigSpec.ConfigValue<Boolean> DuckweedReplacement;
+        public ForgeConfigSpec.ConfigValue<Boolean> UnrealisticDolphins;
 
         Common(ForgeConfigSpec.Builder builder) {
             builder.push("vanilla_changes");
@@ -22,7 +23,7 @@ public class DoltCompatConfig {
             LeatherHorseThing = builder.comment("If horses wearing leather horse armor can walk on top of powdered snow.").define("Warm Horse Armor", true);
             BOAClearsPoisons = builder.comment("If killing an arthropod with a Bane of Arthropod sword will clear any poison effects the player has.").define("BOA cure", true);
             ReliableSleep = builder.comment("If monsters & being too far away from a bed shouldn't prevent you from sleeping").define("Reliable Sleep", true);
-
+            UnrealisticDolphins = builder.comment("If dolphins shouldn't need air to survive.").define("Dolphins don't need air", false);
             DisableSlimeChunks = builder.comment("If slime chunks should be smote into ten thousand pieces.").define("Disable slime chunks", false);
             BahHumbug = builder.comment("If the texture change of chests during Christmas should be removed").define("Bah Humbug", false);
 
