@@ -25,7 +25,7 @@ public class RichSoilMixin {
             Block aboveBlock = aboveState.getBlock();
 
             if (aboveBlock == GlimmeringWealdModule.glow_shroom) {
-                level.setBlockAndUpdate(pos.above(), (DoltCompatBlocks.GLOWSHROOM_COLONY.get()).defaultBlockState());
+                level.setBlockAndUpdate(pos.above(), DoltCompatBlocks.GLOWSHROOM_COLONY.get().defaultBlockState());
             }
         }
     }

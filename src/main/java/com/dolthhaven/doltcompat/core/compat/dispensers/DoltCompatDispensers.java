@@ -1,5 +1,6 @@
 package com.dolthhaven.doltcompat.core.compat.dispensers;
 
+import com.dolthhaven.doltcompat.core.DoltCompatConfig;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
@@ -7,7 +8,6 @@ import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.EntitySelector;
-import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -20,12 +20,14 @@ import java.util.List;
 
 public class DoltCompatDispensers {
     public static void registerDispenserBehavior() {
-        registerMiscStuff();
-        DoltCompatCauldronDispensers.registerCauldrons();
+        registerFlintAndSteelExplodeCreepers();
         DoltCompatSheepDyeDispensers.registerSheepDispensers();
     }
 
-    public static void registerMiscStuff() {
+    public static void registerFlintAndSteelExplodeCreepers() {
+        if (!DoltCompatConfig.Common.COMMON.DoExplodeCreepers.get())
+            return;
+
         DispenseItemBehavior flintAndSteel = DispenserBlock.DISPENSER_REGISTRY.get(Items.FLINT_AND_STEEL);
 
         DispenserBlock.registerBehavior(Items.FLINT_AND_STEEL, new OptionalDispenseItemBehavior() {

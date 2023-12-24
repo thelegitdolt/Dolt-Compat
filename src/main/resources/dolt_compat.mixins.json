@@ -6,7 +6,6 @@
   "mixins": [
     "CattailBlockMixin",
     "CuttingBoardMixin",
-    "DolphinMixin",
     "DoubleCattailBlockMixin",
     "DuckweedFeatureMixin",
     "FallenLogFeatureMixin",
@@ -19,6 +18,8 @@
     "SlimeMixin"
   ],
   "client": [
+    "client.ChestRendererMixin",
+    "client.BlueprintChestRendererMixin"
   ],
   "minVersion": "0.8"
 }

@@ -1,0 +1,20 @@
+{
+  "rarity": "rare",
+  "priority": 1,
+  "displayName": {
+    "translate": "entity.environmental.slabfish.type.dark_forest"
+  },
+  "conditions": [
+    {
+      "type": "environmental:event",
+      "events": [
+        "spawn",
+        "breed"
+      ]
+    },
+    {
+      "type": "environmental:biome",
+      "tag": "dolt_compat:is_dark_forest"
+    }
+  ]
+}

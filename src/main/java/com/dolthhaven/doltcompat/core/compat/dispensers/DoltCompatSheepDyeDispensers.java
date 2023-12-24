@@ -21,6 +21,14 @@ import java.util.List;
 import java.util.Objects;
 
 public class DoltCompatSheepDyeDispensers {
+    private static final HashMap<DyeColor, DispenseItemBehavior> DYE_MAP = new HashMap<>();
+
+    static {
+        for (DyeColor dye : DyeColor.values()) {
+            DYE_MAP.put(dye, DispenserBlock.DISPENSER_REGISTRY.get(ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft", dye.getName() + "_dye"))));
+        }
+    }
+
     public static void registerSheepDispensers() {
         if (DoltCompatConfig.Common.COMMON.DoDispenseSheepDye.get()) {
             for (DyeColor dye : DyeColor.values()) {
@@ -29,16 +37,6 @@ public class DoltCompatSheepDyeDispensers {
             }
         }
     }
-
-    private static HashMap<DyeColor, DispenseItemBehavior> getDyeList() {
-        HashMap<DyeColor, DispenseItemBehavior> map = new HashMap<>();
-        for (DyeColor dye : DyeColor.values()) {
-            map.put(dye, DispenserBlock.DISPENSER_REGISTRY.get(ForgeRegistries.ITEMS.getValue(new ResourceLocation("minecraft", dye.getName() + "_dye"))));
-        }
-        return map;
-    }
-
-    private static final HashMap<DyeColor, DispenseItemBehavior> DYE_MAP = getDyeList();
 
     private static DispenseItemBehavior dispenserByDye(DyeColor dye) {
         return new OptionalDispenseItemBehavior() {

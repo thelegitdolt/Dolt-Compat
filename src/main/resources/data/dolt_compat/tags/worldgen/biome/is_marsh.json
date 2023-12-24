@@ -1,0 +1,9 @@
+{
+  "values": [
+    "environmental:marsh",
+    {
+      "id": "goodending:marshy_swamp",
+      "required": false
+    }
+  ]
+}
