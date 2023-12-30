@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(HalfWaterloggedDecorationFeature.class)
 public class HalfWaterloggedDecorationFeatureMixin {
 
-    @Redirect(method = "Lnet/orcinus/goodending/world/gen/features/HalfWaterloggedDecorationFeature;place(Lnet/minecraft/world/level/levelgen/feature/FeaturePlaceContext;)Z",
+    @Redirect(method = "place",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/DoublePlantBlock;placeAt(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;I)V"))
     private void DoltCompat$placeAt(LevelAccessor world, BlockState state, BlockPos pos, int weirdNumber) {
         if (state.is(GoodEndingBlocks.CATTAIL.get())) {

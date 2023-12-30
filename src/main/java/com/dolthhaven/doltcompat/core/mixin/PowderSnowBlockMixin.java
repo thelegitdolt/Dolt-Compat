@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(PowderSnowBlock.class)
 public class PowderSnowBlockMixin {
-    @Inject(at = @At("RETURN"), method = "Lnet/minecraft/world/level/block/PowderSnowBlock;canEntityWalkOnPowderSnow(Lnet/minecraft/world/entity/Entity;)Z", cancellable = true)
+    @Inject(at = @At("RETURN"), method = "canEntityWalkOnPowderSnow", cancellable = true)
     private static void DoltCompat$canEntityWalkOnPowderSnow(Entity entity, CallbackInfoReturnable<Boolean> cir) {
         if (entity instanceof LivingEntity livingEntity) {
             if (livingEntity instanceof Horse horse && DoltCompatConfig.Common.COMMON.LeatherHorseThing.get()) {

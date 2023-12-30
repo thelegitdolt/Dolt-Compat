@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Mixin(ShallowWaterFeature.class)
 public class ShallowWaterFeatureMixin {
 
-    @Redirect(method = "Lnet/orcinus/goodending/world/gen/features/ShallowWaterFeature;placeSquare(Lnet/orcinus/goodending/world/gen/features/config/ShallowWaterConfig;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/util/RandomSource;I)Z",
+    @Redirect(method = "placeSquare(Lnet/orcinus/goodending/world/gen/features/config/ShallowWaterConfig;Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/WorldGenLevel;Lnet/minecraft/util/RandomSource;I)Z",
             at = @At(value = "INVOKE", target = "Lnet/minecraft/world/level/block/DoublePlantBlock;placeAt(Lnet/minecraft/world/level/LevelAccessor;Lnet/minecraft/world/level/block/state/BlockState;Lnet/minecraft/core/BlockPos;I)V"))
     private void DoltCompat$placeAt(LevelAccessor world, BlockState state, BlockPos pos, int weirdNumber) {
         if (state.is(GoodEndingBlocks.CATTAIL.get()) && ((world.isWaterAt(pos) || world.isEmptyBlock(pos)) && world.isEmptyBlock(pos.above()) && EnvironmentalBlocks.CATTAIL.get().defaultBlockState().canSurvive(world, pos))) {

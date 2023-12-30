@@ -6,7 +6,6 @@ import net.minecraft.core.BlockSource;
 import net.minecraft.core.dispenser.DispenseItemBehavior;
 import net.minecraft.core.dispenser.OptionalDispenseItemBehavior;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.animal.Sheep;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -44,10 +43,9 @@ public class DoltCompatSheepDyeDispensers {
             protected @NotNull ItemStack execute(@NotNull BlockSource source, @NotNull ItemStack stack) {
                 BlockPos affectPos = source.getPos().relative(source.getBlockState().getValue(DispenserBlock.FACING));
                 Level level = source.getLevel();
-                List<Sheep> Sheepies = level.getEntitiesOfClass(Sheep.class, new AABB(affectPos), EntitySelector.NO_SPECTATORS).stream()
-                        .filter((sheepie) -> !sheepie.getColor().equals(dye)).toList();
-                if (!Sheepies.isEmpty()) {
-                    for (Sheep sheep : Sheepies) {
+                List<Sheep> sheeps = level.getEntitiesOfClass(Sheep.class, new AABB(affectPos), (sheepie) -> !sheepie.getColor().equals(dye));
+                if (!sheeps.isEmpty()) {
+                    for (Sheep sheep : sheeps) {
                         this.setSuccess(true);
                         stack.shrink(1);
                         sheep.setColor(dye);

@@ -12,13 +12,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(ServerPlayer.class)
 public class ServerPlayerMixin {
-    @Inject(method = "bedInRange(Lnet/minecraft/core/BlockPos;Lnet/minecraft/core/Direction;)Z",
+    @Inject(method = "bedInRange",
     at = @At("RETURN"), cancellable = true)
     private void DoltCompat$NoMoreTooFarAwayBS(BlockPos pos, Direction dir, CallbackInfoReturnable<Boolean> cir) {
         if (DoltCompatConfig.Common.COMMON.ReliableSleep.get()) cir.setReturnValue(true);
     }
 
-    @Inject(method = "lambda$startSleepInBed$7(Lnet/minecraft/world/entity/monster/Monster;)Z", at = @At("RETURN"), cancellable = true, remap = false)
+    @Inject(method = "lambda$startSleepInBed$7", at = @At("RETURN"), cancellable = true, remap = false)
     private void DoltCompat$NoMoreMonsterNearbyBS(Monster monster, CallbackInfoReturnable<Boolean> cir) {
         if (DoltCompatConfig.Common.COMMON.ReliableSleep.get()) cir.setReturnValue(false);
     }
