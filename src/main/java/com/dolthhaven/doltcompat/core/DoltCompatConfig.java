@@ -6,7 +6,6 @@ import org.apache.commons.lang3.tuple.Pair;
 public class DoltCompatConfig {
     public static class Common {
         public ForgeConfigSpec.ConfigValue<Boolean> DoDispenseSheepDye;
-        public ForgeConfigSpec.ConfigValue<Boolean> BahHumbug;
         public ForgeConfigSpec.ConfigValue<Boolean> DoExplodeCreepers;
         public ForgeConfigSpec.ConfigValue<Boolean> DisableSlimeChunks;
         public ForgeConfigSpec.ConfigValue<Boolean> BOAClearsPoisons;
@@ -25,7 +24,6 @@ public class DoltCompatConfig {
             ReliableSleep = builder.comment("If monsters & being too far away from a bed shouldn't prevent you from sleeping").define("Reliable Sleep", true);
             UnrealisticDolphins = builder.comment("If dolphins shouldn't need air to survive.").define("Dolphins don't need air", false);
             DisableSlimeChunks = builder.comment("If slime chunks should be smote into ten thousand pieces.").define("Disable slime chunks", false);
-            BahHumbug = builder.comment("If the texture change of chests during Christmas should be removed").define("Bah Humbug", false);
 
             builder.pop();
 

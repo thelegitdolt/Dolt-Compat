@@ -36,7 +36,7 @@ minecraft {
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             arg "-mixin.config=" + project.modId + ".mixins.json"
             mods {
-                environmental {
+                dolt_compat {
                     source sourceSets.main
                 }
             }
@@ -49,7 +49,7 @@ minecraft {
             property "mixin.env.refMapRemappingFile", "${projectDir}/build/createSrgToMcp/output.srg"
             arg "-mixin.config=" + project.modId + ".mixins.json"
             mods {
-                environmental {
+                dolt_compat {
                     source sourceSets.main
                 }
             }
@@ -63,7 +63,7 @@ minecraft {
             property "blueprint.indev", "true"
             args "--mod", project.modId, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources"), "--existing-mod", "blueprint"
             mods {
-                environmental {
+                dolt_compat {
                     source sourceSets.main
                 }
             }
@@ -81,12 +81,9 @@ dependencies {
     implementation fg.deobf("curse.maven:farmers_delight-398521:${project.farmersDelight}")
     implementation fg.deobf("curse.maven:quark-243121:${project.quark}")
     implementation fg.deobf("curse.maven:autoreglib-250363:${project.autoRegLib}")
-    implementation fg.deobf("curse.maven:neapolitan-382016:4023083")
+    implementation fg.deobf("curse.maven:environmental-388992:5146329")
+    implementation fg.deobf("curse.maven:goodending-690161:4363719")
 
-    compileOnly fg.deobf("curse.maven:environmental-388992:4415514")
-    compileOnly fg.deobf("curse.maven:goodending-690161:4363719")
-
-    runtimeOnly fg.deobf("curse.maven:environmental-388992:4415514")
     runtimeOnly fg.deobf("curse.maven:goodending-690161:4363719")
     compileOnly fg.deobf("com.teamabnormals:boatload:${project.minecraft}-${project.boatload}")
     compileOnly fg.deobf("com.teamabnormals:boatload:${project.minecraft}-${project.boatload}")
